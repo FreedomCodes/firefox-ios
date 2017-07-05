@@ -8,7 +8,7 @@ class ClipBoardTests: BaseTestCase {
     let url = "www.google.com"
     var navigator: Navigator!
     var app: XCUIApplication!
-
+    
     override func setUp() {
         super.setUp()
         app = XCUIApplication()
@@ -55,10 +55,17 @@ class ClipBoardTests: BaseTestCase {
         //Skip the intro
         app.buttons["IntroViewController.startBrowsingButton"].tap()
         
-        //Wait until recently copied pop up appears
-        waitforExistence(app.buttons["Go"])
-        
-        //Click on the pop up Go button to load the recently copied url
-        app.buttons["Go"].tap()
-    }
-}
+        if isiPad() == true {
+            app.textFields["url"].tap()
+            app.textFields["address"].press(forDuration: 1.7)
+            app.menuItems["Paste"].tap()
+            app.typeText("\r")
+        } else {
+            //Wait until recently copied pop up appears
+            waitforExistence(app.buttons["Go"])
+            
+            //Click on the pop up Go button to load the recently copied url
+            app.buttons["Go"].tap()
+        }
+    }}
+

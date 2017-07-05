@@ -638,7 +638,7 @@ extension ActivityStreamPanel: DataObserverDelegate {
 
 extension ActivityStreamPanel: HomePanelContextMenu {
     func presentContextMenu(for site: Site, with indexPath: IndexPath, completionHandler: @escaping () -> PhotonActionSheet?) {
-
+        
         fetchBookmarkStatus(for: site, with: indexPath, forSection: Section(indexPath.section)) {
             guard let contextMenu = completionHandler() else { return }
             self.present(contextMenu, animated: true, completion: nil)
